@@ -1,5 +1,8 @@
-HELP.md
-target/
+Fineance-Spring Boot/HELP.md
+Fineance-Spring Boot/target/
+Fineance-Spring Boot/*.iws
+Fineance-Spring Boot/*.iml
+Fineance-Spring Boot/*.ipr
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
