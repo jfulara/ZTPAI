@@ -1,10 +1,8 @@
 package com.example.Fineance.controllers;
 
 import com.example.Fineance.models.User;
-import com.example.Fineance.repositories.UserRepository;
 import com.example.Fineance.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
@@ -19,12 +17,12 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getUsers() {
+    public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id) {
-        return userService.getUserById(id);
+    @GetMapping("/{id_user}")
+    public User getUserById(@PathVariable Long id_user) {
+        return userService.getUserById(id_user);
     }
 }
