@@ -7,8 +7,6 @@ function Home() {
             <nav>
                 <ul>
                     <li><Link to="/users">Lista użytkowników</Link></li>
-                    <li><Link to="/operations/expenses">Lista wydatków</Link></li>
-                    <li><Link to="/operations/incomes">Lista wpływów</Link></li>
                 </ul>
             </nav>
         </div>
