@@ -7,6 +7,7 @@ import com.example.Fineance.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ExpenseService {
@@ -20,7 +21,7 @@ public class ExpenseService {
     }
 
     public List<Expense> getAllExpensesByUser(long id_user) {
-        User user = userRepository.findById(id_user);
+        Optional<User> user = userRepository.findById(id_user);
         return expenseRepository.findByUser(user);
     }
 

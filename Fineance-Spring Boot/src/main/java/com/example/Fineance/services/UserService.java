@@ -5,6 +5,7 @@ import com.example.Fineance.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -19,11 +20,11 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User getUserByEmail(String email) {
+    public Optional<User> getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
-    public User getUserById(long id) {
+    public Optional<User> getUserById(long id) {
         return userRepository.findById(id);
     }
 }
