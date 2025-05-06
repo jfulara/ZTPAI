@@ -1,4 +1,4 @@
-package com.example.Fineance.services;
+package com.example.Fineance.security;
 
 import com.example.Fineance.models.User;
 import com.example.Fineance.repositories.UserRepository;
@@ -21,7 +21,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+                .orElseThrow(() -> new UsernameNotFoundException("Nie znaleziono użytkownika o emailu: " + email));
 
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),

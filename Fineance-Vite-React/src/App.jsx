@@ -4,6 +4,7 @@ import UserDetails from './UserDetails'
 import ExpensesList from './ExpensesList'
 import IncomesList from './IncomesList'
 import Home from './Home'
+import Login from './Login'
 import './App.css'
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
         <Router>
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
                 <Route path="/users" element={<UsersList />} />
                 <Route path="/users/:id_user" element={<UserDetails />} />
                 <Route path="/users/:id_user/operations/expenses" element={<ExpensesList />} />

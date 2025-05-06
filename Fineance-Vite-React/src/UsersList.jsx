@@ -1,12 +1,20 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 function UsersList() {
     const [users, setUsers] = useState([])
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        fetch('http://localhost:8080/api/users')
+        const token = localStorage.getItem('token') // zakładamy, że został wcześniej zapisany po logowaniu
+
+        fetch('http://localhost:8080/api/users', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then(res => res.json())
             .then(data => {
                 setUsers(data)
@@ -17,6 +25,18 @@ function UsersList() {
                 setLoading(false)
             })
     }, [])
+
+
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+
+        // Opcjonalnie: wyczyść stan użytkownika w aplikacji
+        // setCurrentUser(null);
+
+        navigate('/login');
+    };
 
     return (
         <div>
@@ -32,6 +52,9 @@ function UsersList() {
                     ))}
                 </ul>
             )}
+            <button onClick={handleLogout}>
+                Wyloguj się
+            </button>
         </div>
     )
 }

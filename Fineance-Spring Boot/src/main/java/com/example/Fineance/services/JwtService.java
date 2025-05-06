@@ -10,7 +10,7 @@ import java.util.Date;
 @Service
 public class JwtService {
 
-    private final String SECRET_KEY = "tajny_klucz"; // lepiej w .properties
+    private final String SECRET_KEY = "bstdHMAku0Mr41iPH2zoUARpEAUaZaJPfU8threS6ac="; // lepiej w .properties
 
     public String generateToken(UserDetails userDetails) {
         return Jwts.builder()
