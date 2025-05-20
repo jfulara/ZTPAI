@@ -23,7 +23,7 @@ function Login() {
                 const data = await response.json();
                 localStorage.setItem('token', data.token);
                 // Przekieruj użytkownika lub zaktualizuj stan aplikacji
-                navigate('/users')
+                navigate('/')
             } else {
                 throw new Error('Błąd logowania')
             }
