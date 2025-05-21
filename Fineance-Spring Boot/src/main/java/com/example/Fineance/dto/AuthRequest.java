@@ -1,4 +1,4 @@
-package com.example.Fineance.security;
+package com.example.Fineance.dto;
 
 public class AuthRequest {
     private String email;

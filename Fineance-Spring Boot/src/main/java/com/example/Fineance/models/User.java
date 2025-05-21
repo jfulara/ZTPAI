@@ -16,6 +16,8 @@ public class User {
     private String email;
     private String password;
 
+    private String role;
+
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Expense> expenses;
@@ -78,5 +80,13 @@ public class User {
 
     public void setIncomes(List<Income> incomes) {
         this.incomes = incomes;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
