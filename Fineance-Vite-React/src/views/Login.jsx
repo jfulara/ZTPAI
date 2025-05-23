@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../contexts/AuthContext'
+import { useContext } from 'react'
 
 function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const navigate = useNavigate()
+    const { setUser } = useContext(AuthContext)
 
     const handleLogin = async (e) => {
         e.preventDefault()
@@ -13,6 +16,7 @@ function Login() {
         try {
             const response = await fetch('http://localhost:8080/api/auth/login', {
                 method: 'POST',
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -20,15 +24,14 @@ function Login() {
             });
 
             if (response.ok) {
-                const data = await response.json();
-                localStorage.setItem('token', data.token);
-                // Przekieruj użytkownika lub zaktualizuj stan aplikacji
+                const userData = await response.json();
+                setUser(userData);
                 navigate('/')
             } else {
-                throw new Error('Błąd logowania')
+                setError('Niepoprawne dane logowania')
             }
         } catch (error) {
-            setError('Niepoprawne dane logowania')
+            setError('Błąd logowania')
         }
     };
 

@@ -5,16 +5,14 @@ function Messages() {
     const [response, setResponse] = useState("");
 
     const handleSend = async () => {
-        const token = localStorage.getItem('token');
-
         try {
             const res = await fetch("http://localhost:8080/api/messages", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "text/plain",
-                    "Authorization": `Bearer ${token}`
+                    "Content-Type": "text/plain"
                 },
-                body: message,
+                credentials: "include",
+                body: message
             });
 
             const text = await res.text();

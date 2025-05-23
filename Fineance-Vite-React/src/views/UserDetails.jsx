@@ -8,13 +8,11 @@ function UserDetails() {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        const token = localStorage.getItem('token')
-
         fetch(`http://localhost:8080/api/users/${id_user}`, {
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
         })
             .then(res => res.json())
             .then(data => {

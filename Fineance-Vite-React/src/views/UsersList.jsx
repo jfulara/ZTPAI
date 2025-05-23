@@ -1,19 +1,20 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthContext'
+import { useContext } from 'react'
 
 function UsersList() {
-    const [users, setUsers] = useState([])
-    const [loading, setLoading] = useState(true)
+    const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const { logout } = useContext(AuthContext);
 
     useEffect(() => {
-        const token = localStorage.getItem('token') // zakładamy, że został wcześniej zapisany po logowaniu
-
         fetch('http://localhost:8080/api/users', {
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
         })
             .then(res => res.json())
             .then(data => {
@@ -29,12 +30,8 @@ function UsersList() {
 
     const navigate = useNavigate();
 
-    const handleLogout = () => {
-        localStorage.removeItem('token');
-
-        // Opcjonalnie: wyczyść stan użytkownika w aplikacji
-        // setCurrentUser(null);
-
+    const handleLogout = async () => {
+        await logout();
         navigate('/login');
     };
 

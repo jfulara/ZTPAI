@@ -1,0 +1,506 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Calistoga';
+    font-weight: normal;
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: normal;
+}
+
+
+nav.menu {
+    width: 18vw;
+    height: 98.9vh;
+    margin: 0;
+    padding: 0;
+    background-color: #d3ffff;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    overflow-x: hidden;
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    border-image: linear-gradient(to bottom, #25C839, #0F8BD3);
+    background: linear-gradient(#d3ffff, #d3ffff) padding-box, 
+                linear-gradient(to bottom, #25C839, #0F8BD3) border-box;
+    border: 5px solid transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo > p {
+    width: 15vw;
+    text-align: center;
+    font-family: 'Lily Script One';
+    font-size: 3.4rem;
+    background-image: linear-gradient(to right, #25C839, #0F8BD3);
+    color: transparent;
+    background-clip: text;
+}
+
+div.welcome-string {
+    font-size: 2rem;
+}
+
+div.welcome-string > p {
+    margin: 0;
+}
+
+nav.menu > ul.active {
+    display: flex;
+    padding: 2vh;
+    list-style-type: none;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5vh;
+}
+
+nav.menu > ul.mobile-icons {
+    display: none;
+}
+
+nav.menu > ul > li > a {
+    width: 14vw;
+    align-items: start;
+    border-style: none none solid none;
+    border-width: 2px;
+    padding: 1.5vh 0.5vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: black;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+nav.menu > ul > li > a.first {
+    border-style: solid none solid none;
+}
+
+nav.menu > ul > li > a > i {
+    font-size: 1em;
+}
+
+
+nav.menu > ul > li > a:hover {
+    color: #af238cb0;
+    border-bottom: 2px solid black;
+    transition: all 0.3s ease;
+}
+
+nav.menu > ul > li > a.first:hover {
+    border-top: 2px solid black;
+}
+
+nav.menu > ul > li > a.active {
+    color: #af238c;
+    border-bottom: 2px solid black;
+}
+
+nav.menu > ul > li > a.first.active {
+    border-top: 2px solid black;
+}
+
+nav.menu > div.buttons{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    margin-bottom: 3vh;
+}
+
+nav.menu > div.buttons button{
+    background-color: #d3ffff;
+    padding: 1.5vh 1.5vw;
+    width: 11vw;
+    justify-content: center;
+    text-align: center;
+    font-size: 1em;
+    font-family: 'Calistoga';
+    display: inline-block;
+    border-radius: 2rem;
+    display: flex;
+    position: relative;
+    margin: 1vh;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+nav.menu > div.buttons button:hover {
+    color: #af238cb0;
+    transition: all 0.3s ease;
+}
+
+nav.menu > div.buttons button > i {
+    color: #000;
+    transform: rotate(0deg);
+    transition: transform 0.3s ease;
+}
+
+nav.menu > div.buttons button:hover > i {
+    transform: rotate(90deg);
+    transition: transform 0.3s ease;
+}
+
+nav.menu > div.buttons > button.settings{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 1.22vh 1.5vw;
+}
+
+nav.menu > div.buttons > button.settings{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 1.22vh 1.5vw;
+}
+
+nav.menu > div.buttons > button.settings > i{
+    font-size: 1.7em;
+}
+
+nav.menu > div.buttons button.logout{
+    background-color: #FF000050;
+    transition: all 0.3s ease;
+}
+
+nav.menu > div.buttons button.logout:hover{
+    background-color: #ff0000d0;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+nav.adder {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    bottom: 2rem;
+    right: 2rem;
+    width: 6rem;
+    height: 6rem;
+    background-color: #d3ffff;
+    z-index: 1;
+    border-radius: 3rem;
+    transition: all 0.4s ease;
+}
+
+nav.adder:hover {
+    width: 20rem;
+    height: 15rem;
+    transition: all 0.4s ease;
+}
+
+nav.adder > ul.adder-list {
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+}
+
+nav.adder:hover > ul.adder-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.adder-item {
+    margin: 1rem 0;
+}
+
+.adder-link {
+    color: #000;
+    width: 14rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-decoration: none;
+    font-family: 'Calistoga';
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.adder-link > i {
+    font-size: 2rem;
+}
+
+.adder-link > span {
+    color: #000;
+    transition: all 0.3s ease;
+}
+
+.adder-link:hover > span {
+    color: #af238cb0;
+    transition: all 0.3s ease;
+}
+
+.adder-link > i {
+    transform: rotate(0deg);
+    transition: all 0.4s ease;
+}
+
+.adder-link:hover > i {
+    transform: rotate(180deg);
+    transition: all 0.4s ease;
+}
+
+nav.adder > div.plus {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 2rem;
+    right: 2.1rem;
+    transform: rotate(0deg);
+    transition: transform 0.5s ease;
+}
+
+nav.adder:hover > div.plus {
+    transform: rotate(135deg);
+    transition: transform 0.5s ease;
+}
+
+nav.adder > div.plus > i {
+    font-size: 2rem;
+}
+
+main {
+    height: 96vh;
+    margin-left: 20vw;
+    padding: 1em;
+}
+
+.top {
+    height: 10vh;
+}
+
+.top > h1 {
+    font-size: 2rem;
+}
+
+.bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.left-side {
+    width: 50%;
+}
+
+.comparisons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.comparisons > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.comparisons > div > h1 {
+    font-size: 2rem;
+    text-align: center;
+    padding: 0 2rem;
+    margin: 2rem;
+}
+
+.comparisons > div > h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    padding: 0 2rem;
+    margin: 2rem;
+}
+
+.right-side {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-side > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 1.5rem;
+    height: 25rem;
+    width: 27rem;
+    margin: 3rem ;
+}
+
+.right-side > div.incomes-window {
+    background-color: #9CFFA8;
+}
+
+.incomes-window > h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin: 1rem;
+}
+
+.right-side > div.expenses-window {
+    background-color: #FFBDBD;
+}
+
+.expenses-window > h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin: 1rem;
+}
+
+.login-container {
+    position: relative;
+    height: 70vh;
+    width: 70vw;
+    align-content: center;
+    justify-content: space-evenly;
+    margin: 15vh 15vw;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    flex-direction: row;
+    border-radius: 75px;
+    border-image: linear-gradient(to bottom, #25C839, #0F8BD3);
+    border: 5px solid transparent;
+    background: linear-gradient(#FFFFFF, #FFFFFF) padding-box,
+    linear-gradient(to bottom, #25C839, #0F8BD3) border-box;
+}
+
+.logo-side {
+    height: 35rem;
+    width: 35rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.logo-side > div.logo {
+    margin: 1rem 0;
+}
+
+.logo-side > div.logo > p {
+    font-size: 7rem;
+    margin: 0;
+    width: 35rem;
+}
+
+.logo-side > div.description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem 0 3rem 0;
+}
+
+.logo-side > div.description > p.main-description {
+    font-size: 2.7rem;
+    margin: 0 0 2rem 0;
+}
+
+.logo-side > div.description > p.additional-description {
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.form-side {
+    height: 30rem;
+    width: 30rem;
+}
+
+form.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form.register {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.no-valid {
+    border: 3px solid red;
+    border-radius: 1rem;
+    box-shadow: 0 0 0 0.2rem red;
+    outline: none;
+}
+
+@media (max-width: 768px) {
+    nav > ul {
+        display: none;
+    }
+
+    nav > ul.mobile-icons {
+        display: block;
+    }
+
+    nav > ul.active {
+        display: block;
+        position: fixed;
+        width: 70%;
+        margin-top: 5em;
+        height: 100%;
+    }
+
+    nav > ul.active > li {
+        flex-direction: row;
+        padding: 1em;
+        justify-content: flex-start;
+    }
+}
+
+
+@media print { 
+    nav {
+        display: none;
+    }
+
+    main {
+        margin: 0;
+        padding: 0;
+    }
+
+    .floating-icon {
+        display: none;
+    }
+
+    p {
+        font-size: 1.5em;
+    }
+}
