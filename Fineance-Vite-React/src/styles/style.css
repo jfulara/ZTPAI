@@ -3,6 +3,8 @@ body {
     padding: 0;
     font-family: 'Calistoga';
     font-weight: normal;
+    background-color: #2C2C2C;
+    color: #dddddd;
 }
 
 h1{
@@ -12,13 +14,12 @@ h1{
     font-weight: normal;
 }
 
-
 nav.menu {
     width: 18vw;
     height: 98.9vh;
     margin: 0;
     padding: 0;
-    background-color: #d3ffff;
+    background-color: #522546;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     position: fixed;
     top: 0;
@@ -27,9 +28,9 @@ nav.menu {
     overflow-x: hidden;
     border-top-right-radius: 2rem;
     border-bottom-right-radius: 2rem;
-    border-image: linear-gradient(to bottom, #25C839, #0F8BD3);
-    background: linear-gradient(#d3ffff, #d3ffff) padding-box, 
-                linear-gradient(to bottom, #25C839, #0F8BD3) border-box;
+    border-image: linear-gradient(to bottom, #F7374F, #88304E);
+    background: linear-gradient(#242424, #242424) padding-box,
+    linear-gradient(to bottom, #F7374F, #88304E) border-box;
     border: 5px solid transparent;
     display: flex;
     flex-direction: column;
@@ -48,7 +49,7 @@ nav.menu {
     text-align: center;
     font-family: 'Lily Script One';
     font-size: 3.4rem;
-    background-image: linear-gradient(to right, #25C839, #0F8BD3);
+    background-image: linear-gradient(to right, #F7374F, #88304E);
     color: transparent;
     background-clip: text;
 }
@@ -87,7 +88,7 @@ nav.menu > ul > li > a {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    color: black;
+    color: #dddddd;
     text-decoration: none;
     transition: all 0.3s ease;
     cursor: pointer;
@@ -95,6 +96,7 @@ nav.menu > ul > li > a {
 
 nav.menu > ul > li > a.first {
     border-style: solid none solid none;
+    color: #dddddd;
 }
 
 nav.menu > ul > li > a > i {
@@ -103,22 +105,22 @@ nav.menu > ul > li > a > i {
 
 
 nav.menu > ul > li > a:hover {
-    color: #af238cb0;
-    border-bottom: 2px solid black;
+    color: #88304E;
+    border-bottom: 2px solid #dddddd;
     transition: all 0.3s ease;
 }
 
 nav.menu > ul > li > a.first:hover {
-    border-top: 2px solid black;
+    border-top: 2px solid #dddddd;
 }
 
 nav.menu > ul > li > a.active {
-    color: #af238c;
-    border-bottom: 2px solid black;
+    color: #F7374F;
+    border-bottom: 2px solid #dddddd;
 }
 
 nav.menu > ul > li > a.first.active {
-    border-top: 2px solid black;
+    border-top: 2px solid #dddddd;
 }
 
 nav.menu > div.buttons{
@@ -131,7 +133,7 @@ nav.menu > div.buttons{
 }
 
 nav.menu > div.buttons button{
-    background-color: #d3ffff;
+    background-color: #2C2C2C;
     padding: 1.5vh 1.5vw;
     width: 11vw;
     justify-content: center;
@@ -145,15 +147,17 @@ nav.menu > div.buttons button{
     margin: 1vh;
     cursor: pointer;
     transition: all 0.3s ease;
+    color: #dddddd;
+    border-color: #1C1C1C;
 }
 
 nav.menu > div.buttons button:hover {
-    color: #af238cb0;
+    color: #88304E;
     transition: all 0.3s ease;
 }
 
 nav.menu > div.buttons button > i {
-    color: #000;
+    color: #dddddd;
     transform: rotate(0deg);
     transition: transform 0.3s ease;
 }
@@ -171,25 +175,17 @@ nav.menu > div.buttons > button.settings{
     padding: 1.22vh 1.5vw;
 }
 
-nav.menu > div.buttons > button.settings{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-    padding: 1.22vh 1.5vw;
-}
-
 nav.menu > div.buttons > button.settings > i{
     font-size: 1.7em;
 }
 
 nav.menu > div.buttons button.logout{
-    background-color: #FF000050;
+    background-color: #88304E;
     transition: all 0.3s ease;
 }
 
 nav.menu > div.buttons button.logout:hover{
-    background-color: #ff0000d0;
+    background-color: #F7374F;
     color: white;
     transition: all 0.3s ease;
 }
@@ -204,10 +200,11 @@ nav.adder {
     right: 2rem;
     width: 6rem;
     height: 6rem;
-    background-color: #d3ffff;
+    background-color: #242424;
     z-index: 1;
-    border-radius: 3rem;
+    border-radius: 4rem;
     transition: all 0.4s ease;
+    border: 3px solid;
 }
 
 nav.adder:hover {
@@ -235,7 +232,7 @@ nav.adder:hover > ul.adder-list {
 }
 
 .adder-link {
-    color: #000;
+    color: #242424;
     width: 14rem;
     display: flex;
     align-items: center;
@@ -251,18 +248,30 @@ nav.adder:hover > ul.adder-list {
 }
 
 .adder-link > span {
-    color: #000;
+    color: #dddddd;
     transition: all 0.3s ease;
 }
 
 .adder-link:hover > span {
-    color: #af238cb0;
+    color: #88304E;
     transition: all 0.3s ease;
 }
 
 .adder-link > i {
     transform: rotate(0deg);
     transition: all 0.4s ease;
+}
+
+.adder-link > i.fa-circle-plus > svg {
+    border: 3px solid #41B445;
+    border-radius: 50%;
+    background-color: #41B445;
+}
+
+.adder-link > i.fa-circle-minus > svg {
+    border: 3px solid #BF1A2F;
+    border-radius: 50%;
+    background-color: #BF1A2F;
 }
 
 .adder-link:hover > i {
@@ -275,7 +284,7 @@ nav.adder > div.plus {
     display: flex;
     justify-content: center;
     align-items: center;
-    bottom: 2rem;
+    bottom: 1.75rem;
     right: 2.1rem;
     transform: rotate(0deg);
     transition: transform 0.5s ease;
@@ -362,10 +371,11 @@ main {
     height: 25rem;
     width: 27rem;
     margin: 3rem ;
+    background-color: #242424;
 }
 
 .right-side > div.incomes-window {
-    background-color: #9CFFA8;
+    border: 3px solid #41B445;
 }
 
 .incomes-window > h1 {
@@ -375,7 +385,7 @@ main {
 }
 
 .right-side > div.expenses-window {
-    background-color: #FFBDBD;
+    border: 3px solid #BF1A2F;
 }
 
 .expenses-window > h1 {
@@ -454,6 +464,10 @@ form.register {
     align-items: center;
 }
 
+form input {
+    color: #dddddd;
+}
+
 .no-valid {
     border: 3px solid red;
     border-radius: 1rem;
@@ -486,7 +500,7 @@ form.register {
 }
 
 
-@media print { 
+@media print {
     nav {
         display: none;
     }
@@ -504,3 +518,11 @@ form.register {
         font-size: 1.5em;
     }
 }
+
+/*Colors to use:*/
+/* #FFD046 - yellow */
+/* #0077B6 - blue */
+/* #5F4BB6 - violet */
+/* #256EFF - intense blue */
+/* #E08E45 - orange */
+/* #E26D5A - dark orange */

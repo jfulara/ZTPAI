@@ -38,7 +38,7 @@ function Register() {
     };
 
     return (
-        <main>
+        <main className="security-main">
             <div className="login-container">
                 <div className="logo-side">
                     <div className="logo">
@@ -59,7 +59,7 @@ function Register() {
                         </div>
                         <input name="name" placeholder="Imię" value={form.name} onChange={handleChange} required />
                         <input name="surname" placeholder="Nazwisko" value={form.surname} onChange={handleChange} required />
-                        <input name="email" type="email" placeholder="Email" value={form.email} onChange={handleChange} required />
+                        <input name="email" type="email" placeholder="E-mail" value={form.email} onChange={handleChange} required />
                         <input name="password" type="password" placeholder="Hasło" value={form.password} onChange={handleChange} required />
                         <input name="confirmPassword" type="password" placeholder="Powtórz hasło" value={form.confirmPassword} onChange={handleChange} required
                         />

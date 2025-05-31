@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../contexts/AuthContext'
 import { useContext } from 'react'
+import { Link } from 'react-router-dom'
+import '../styles/style.css';
+import '../styles/security.css';
 
 function Login() {
     const [email, setEmail] = useState('')
@@ -36,19 +39,45 @@ function Login() {
     };
 
     return (
-        <form onSubmit={handleLogin}>
-            <h2>Logowanie</h2>
-            <div>
-                <label>Email:</label>
-                <input value={email} onChange={(e) => setEmail(e.target.value)} />
+        <main className="security-main">
+            <div className="login-container">
+                <div className="logo-side">
+                    <div className="logo">
+                        <p>
+                            Fineance
+                        </p>
+                    </div>
+                    <div className="description">
+                        <p className="main-description">
+                            Dzień dobry!
+                        </p>
+                        <p className="additional-description">
+                            Zaloguj się lub utwórz nowe konto:
+                        </p>
+                    </div>
+                </div>
+                <div className="form-side">
+                    <form className="login" onSubmit={handleLogin}>
+                        <div className="messages">
+                            {error && <p>{error}</p>}
+                        </div>
+                        <div>
+                            <input placeholder="E-mail" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        </div>
+                        <div>
+                            <input placeholder="Hasło" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                        </div>
+                        <div className="button-background">
+                            <button className="special-button" type="submit">Zaloguj się</button>
+                        </div>
+                        <div className="register-link">
+                            <p>Nie masz jeszcze konta?&nbsp;</p>
+                            <Link to="/register">Utwórz je tutaj!</Link>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div>
-                <label>Hasło:</label>
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-            </div>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <button type="submit">Zaloguj</button>
-        </form>
+        </main>
     );
 }
 
