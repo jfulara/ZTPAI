@@ -1,8 +1,11 @@
 package com.example.Fineance.repositories;
 
+import com.example.Fineance.dto.CategorySummaryDTO;
 import com.example.Fineance.models.Expense;
 import com.example.Fineance.models.User;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,4 +16,8 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
     List<Expense> findAll();
     List<Expense> findByUser(Optional<User> user);
     List<Expense> findByTitle(String title);
+
+    @Query("SELECT new com.example.Fineance.dto.CategorySummaryDTO(e.category, SUM(e.amount)) " +
+            "FROM Expense e WHERE e.user.id_user = :id_user GROUP BY e.category ORDER BY SUM(e.amount) DESC")
+    List<CategorySummaryDTO> findTopExpenseCategories(long id_user, Pageable pageable);
 }
