@@ -140,7 +140,6 @@ nav.menu > div.buttons button{
     text-align: center;
     font-size: 1em;
     font-family: 'Calistoga';
-    display: inline-block;
     border-radius: 2rem;
     display: flex;
     position: relative;
@@ -176,7 +175,10 @@ nav.menu > div.buttons > button.settings{
 }
 
 nav.menu > div.buttons > button.settings > i{
-    font-size: 1.7em;
+    font-size: 1.75em;
+    width: 1.75rem;
+    height: 1.75rem;
+    display: flex;
 }
 
 nav.menu > div.buttons button.logout{
@@ -243,10 +245,6 @@ nav.adder:hover > ul.adder-list {
     cursor: pointer;
 }
 
-.adder-link > i {
-    font-size: 2rem;
-}
-
 .adder-link > span {
     color: #dddddd;
     transition: all 0.3s ease;
@@ -260,6 +258,10 @@ nav.adder:hover > ul.adder-list {
 .adder-link > i {
     transform: rotate(0deg);
     transition: all 0.4s ease;
+    font-size: 2rem;
+    width: 2.375rem;
+    height: 2.375rem;
+    display: flex;
 }
 
 .adder-link > i.fa-circle-plus > svg {
@@ -343,14 +345,23 @@ main {
     font-size: 2rem;
     text-align: center;
     padding: 0 2rem;
-    margin: 2rem;
+    margin: 1rem;
 }
 
 .comparisons > div > h2 {
     font-size: 2.5rem;
+    font-weight: normal;
     text-align: center;
     padding: 0 2rem;
-    margin: 2rem;
+    margin: 1rem;
+}
+
+.income-to-expense-positive > h2 {
+    color: #41B445;
+}
+
+.income-to-expense-negative > h2 {
+    color: #BF1A2F;
 }
 
 .right-side {
@@ -368,10 +379,65 @@ main {
     justify-content: flex-start;
     align-items: center;
     border-radius: 1.5rem;
-    height: 25rem;
+    height: 27rem;
     width: 27rem;
-    margin: 3rem ;
+    margin: 2rem ;
     background-color: #242424;
+}
+
+.right-side > div > ul {
+    display: flex;
+    padding: 1vh 2vh 2vh 2vh;
+    list-style-type: none;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.right-side > div > ul > li > a {
+    width: 16vw;
+    border-style: none none solid none;
+    border-width: 2px;
+    padding: 1.25vh 0.5vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: #dddddd;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 0.75rem;
+}
+
+.right-side > div > ul > li > a.first {
+    border-style: solid none solid none;
+    color: #dddddd;
+}
+
+/*.right-side > div > ul > li > a > i {
+    font-size: 1em;
+}*/
+
+.right-side > div > ul > li > a:hover {
+    color: #88304E;
+    border-bottom: 2px solid #dddddd;
+    transition: all 0.3s ease;
+}
+
+div.category {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 15vw;
+}
+
+.right-side > div > ul > li > a.first:hover {
+    border-top: 2px solid #dddddd;
 }
 
 .right-side > div.incomes-window {
