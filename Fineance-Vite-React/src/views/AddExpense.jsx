@@ -97,10 +97,10 @@ function AddExpense() {
                             ))}
                             {error && <p style={{color: 'red'}}>{error}</p>}
                         </div>
-                        <input name="title" type="text" placeholder="title" value={title} onChange={e => setTitle(e.target.value)} required />
-                        <input name="amount" type="number" step="0.01" min="0.00" placeholder="amount" value={amount} onChange={e => setAmount(e.target.value)} required />
-                        <input name="date" type="date" placeholder="date" value={date} onChange={e => setDate(e.target.value)} required />
-                        <select name="category" placeholder="category" value={category} onChange={e => setCategory(e.target.value)} required>
+                        <input name="title" type="text" placeholder="Tytuł" value={title} onChange={e => setTitle(e.target.value)} required />
+                        <input name="amount" type="number" step="0.01" min="0.00" placeholder="Kwota" value={amount} onChange={e => setAmount(e.target.value)} required />
+                        <input name="date" type="date" placeholder="Data" value={date} onChange={e => setDate(e.target.value)} required />
+                        <select name="category" placeholder="Kategoria" value={category} onChange={e => setCategory(e.target.value)} required>
                             <option value="Auto i transport">Auto i transport</option>
                             <option value="Codzienne wydatki">Codzienne wydatki</option>
                             <option value="Dom">Dom</option>
@@ -113,7 +113,7 @@ function AddExpense() {
                             <option value="Rozrywka">Rozrywka</option>
                             <option value="Nieskategoryzowane">Nieskategoryzowane</option>
                         </select>
-                        <button type="submit">SEND</button>
+                        <button type="submit">Dodaj</button>
                     </form>
                 </section>
             </main>

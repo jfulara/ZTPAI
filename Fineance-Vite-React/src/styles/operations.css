@@ -1,0 +1,214 @@
+main.history {
+    display: flex;
+}
+
+.expenses-history {
+    width: 40vw;
+}
+
+.incomes-history {
+    width: 40vw;
+}
+
+.search-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 2vh;
+}
+
+.search-bar input {
+    background: none;
+    border-radius: 10% / 100%;
+    height: 3vh;
+    width: 20vw;
+    text-align: center;
+}
+
+section.operation-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+}
+
+.operation-form > h1 {
+    font-size: 2rem;
+}
+
+.operation-form > form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40vw;
+    height: 80vh;
+    border-image: linear-gradient(to bottom, #F7374F, #88304E);
+    border: 5px solid transparent;
+    background: linear-gradient(#242424, #242424) padding-box,
+    linear-gradient(to bottom, #F7374F, #88304E) border-box;
+    border-radius: 75px;
+    margin: 10vh 0;
+}
+
+.operation-form > form > input {
+    width: 27rem;
+    height: 4rem;
+    border-radius: 20px;
+    background: #2C2C2C;
+    border: 3px solid #dddddd;
+    text-align: center;
+    font-family: "Average Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    margin: 1rem;
+}
+
+.operation-form > form > input[type="number"]::-webkit-inner-spin-button,
+.operation-form > form > input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.operation-form > form > input[type="number"] {
+    -moz-appearance: textfield;
+    text-align: center;
+}
+
+.operation-form > form > input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1) grayscale(1) brightness(1.5);
+    cursor: pointer;
+}
+
+.operation-form > form > input[type="date"] {
+    width: 26rem;
+    height: 4.125rem;
+    padding-left: 1.25rem;
+}
+
+.operation-form > form > select {
+    width: 27.625rem;
+    height: 4.5rem;
+    border-radius: 20px;
+    background: #2C2C2C;
+    border: 3px solid #dddddd;
+    color: #dddddd;
+    text-align: center;
+    font-family: "Average Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    margin: 1rem;
+    padding-left: 0.5rem;
+}
+
+.operation-form > form > button {
+    width: 27.625rem;
+    height: 4rem;
+    border-radius: 20px;
+    color: #dddddd;
+    margin: 1rem;
+    padding: 0;
+    background: #F7374F;
+    border: none;
+    text-align: center;
+    font-family: "Calistoga";
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    pointer-events: all;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+}
+
+section.expenses, section.incomes {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+ul.expense-list, ul.income-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    padding: 0;
+}
+
+li.expense, li.income {
+    width: 35vw;
+    height: 2vh;
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
+h1.date-heading {
+    width: 5.2rem;
+    display: flex;
+    justify-content: flex-start;
+}
+
+h1.title-heading {
+    margin: 0 1rem;
+    width: 17.8rem;
+    display: flex;
+    justify-content: flex-start;
+}
+
+h1.category-heading {
+    width: 10rem;
+    display: flex;
+    justify-content: flex-start;
+}
+
+h1.amount-heading {
+    width: 7rem;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 1rem;
+}
+
+li.expense > h2 {
+    color: red
+}
+
+li.income > h2 {
+    color: green
+}
+
+h1.date {
+    width: 5.2rem;
+    display: flex;
+    justify-content: flex-start;
+}
+
+h1.title {
+    margin: 0 1rem;
+    width: 17.8rem;
+    display: flex;
+    justify-content: flex-start;
+}
+
+p.category {
+    width: 10rem;
+    display: flex;
+    justify-content: flex-start;
+}
+
+h2.amount {
+    width: 7rem;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 1rem;
+}

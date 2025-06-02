@@ -113,7 +113,7 @@ form.register {
 
 .form-side input {
     width: 27rem;
-    height: 3.8rem;
+    height: 4rem;
     border-radius: 20px;
     background: #2C2C2C;
     border: 3px solid #dddddd;
@@ -125,8 +125,8 @@ form.register {
 }
 
 .button-background {
-    width: 27rem;
-    height: 3.8rem;
+    width: 27.625rem;
+    height: 4rem;
     border-radius: 20px;
     border: none;
     display: flex;
@@ -137,8 +137,8 @@ form.register {
 }
 
 .special-button {
-    width: 27rem;
-    height: 3.8rem;
+    width: 27.625rem;
+    height: 4rem;
     padding: 0;
     border-radius: 20px;
     background: #F7374F;

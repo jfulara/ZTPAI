@@ -97,10 +97,10 @@ function AddIncome() {
                             ))}
                             {error && <p style={{color: 'red'}}>{error}</p>}
                         </div>
-                        <input name="title" type="text" placeholder="title" value={title} onChange={e => setTitle(e.target.value)} required />
-                        <input name="amount" type="number" step="0.01" min="0.00" placeholder="amount" value={amount} onChange={e => setAmount(e.target.value)} required />
-                        <input name="date" type="date" placeholder="date" value={date} onChange={e => setDate(e.target.value)} required />
-                        <select name="category" placeholder="category" value={category} onChange={e => setCategory(e.target.value)} required>
+                        <input name="title" type="text" placeholder="Tytuł" value={title} onChange={e => setTitle(e.target.value)} required />
+                        <input name="amount" type="number" step="0.01" min="0.00" placeholder="Kwota" value={amount} onChange={e => setAmount(e.target.value)} required />
+                        <input name="date" type="date" placeholder="Data" value={date} onChange={e => setDate(e.target.value)} required />
+                        <select name="category" placeholder="Kategoria" value={category} onChange={e => setCategory(e.target.value)} required>
                             <option value="Nieistotne">Nieistotne</option>
                             <option value="Oszczędności i inwestycje">Oszczędności i inwestycje</option>
                             <option value="Podarunek">Podarunek</option>
@@ -108,7 +108,7 @@ function AddIncome() {
                             <option value="Wynagrodzenie">Wynagrodzenie</option>
                             <option value="Nieskategoryzowane">Nieskategoryzowane</option>
                         </select>
-                        <button type="submit">SEND</button>
+                        <button type="submit">Dodaj</button>
                     </form>
                 </section>
             </main>

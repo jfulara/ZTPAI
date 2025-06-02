@@ -61,8 +61,7 @@ function Register() {
                         <input name="surname" placeholder="Nazwisko" value={form.surname} onChange={handleChange} required />
                         <input name="email" type="email" placeholder="E-mail" value={form.email} onChange={handleChange} required />
                         <input name="password" type="password" placeholder="Hasło" value={form.password} onChange={handleChange} required />
-                        <input name="confirmPassword" type="password" placeholder="Powtórz hasło" value={form.confirmPassword} onChange={handleChange} required
-                        />
+                        <input name="confirmPassword" type="password" placeholder="Powtórz hasło" value={form.confirmPassword} onChange={handleChange} required />
                         <div className="button-background">
                             <button className="special-button" type="submit">Zarejestruj się</button>
                         </div>
