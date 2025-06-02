@@ -8,6 +8,8 @@ import com.example.Fineance.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,5 +40,9 @@ public class ExpenseService {
     public Expense addExpense(Expense expense) {
         expenseRepository.save(expense);
         return expense;
+    }
+
+    public List<Expense> searchExpenses(long id_user, String title) {
+        return expenseRepository.searchExpenses(id_user, title);
     }
 }

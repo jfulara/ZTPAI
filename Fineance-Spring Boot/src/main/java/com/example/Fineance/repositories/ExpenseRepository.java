@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,4 +21,8 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
     @Query("SELECT new com.example.Fineance.dto.CategorySummaryDTO(e.category, SUM(e.amount)) " +
             "FROM Expense e WHERE e.user.id_user = :id_user GROUP BY e.category ORDER BY SUM(e.amount) DESC")
     List<CategorySummaryDTO> findTopExpenseCategories(long id_user, Pageable pageable);
+
+    @Query("SELECT e FROM Expense e WHERE e.user.id_user = :id_user"
+            + " AND (:title = '' OR LOWER(e.title) LIKE LOWER(CONCAT('%', :title, '%')) )")
+    List<Expense> searchExpenses(long id_user, String title);
 }

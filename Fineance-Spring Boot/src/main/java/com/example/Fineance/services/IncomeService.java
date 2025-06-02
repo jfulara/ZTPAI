@@ -8,6 +8,8 @@ import com.example.Fineance.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,5 +42,9 @@ public class IncomeService {
     public Income addIncome(Income income) {
         incomeRepository.save(income);
         return income;
+    }
+
+    public List<Income> searchIncomes(long id_user, String title) {
+        return incomeRepository.searchIncomes(id_user, title);
     }
 }
