@@ -82,31 +82,39 @@ public class OperationController {
     @GetMapping("/history")
     public ResponseEntity<List<OperationDTO>> searchOperations(
             @RequestParam Long id_user,
-            @RequestParam(required = false, defaultValue = "") String title
+            @RequestParam(required = false, defaultValue = "") String title,
+            @RequestParam(required = false, defaultValue = "") String type
     ) {
         List<Expense> expenses = expenseService.searchExpenses(id_user, title);
         List<Income> incomes = incomeService.searchIncomes(id_user, title);
         List<OperationDTO> result = new ArrayList<>();
-        for (Expense e : expenses) {
-            result.add(new OperationDTO(
-                    e.getId_expense(),
-                    e.getTitle(),
-                    e.getAmount().negate(),
-                    e.getDate(),
-                    e.getCategory(),
-                    "EXPENSE"
-            ));
+
+        if (!type.equals("INCOME")) {
+            for (Expense e : expenses) {
+                result.add(new OperationDTO(
+                        e.getId_expense(),
+                        e.getTitle(),
+                        e.getAmount().negate(),
+                        e.getDate(),
+                        e.getCategory(),
+                        "EXPENSE"
+                ));
+            }
         }
-        for (Income i : incomes) {
-            result.add(new OperationDTO(
-                    i.getId_income(),
-                    i.getTitle(),
-                    i.getAmount(),
-                    i.getDate(),
-                    i.getCategory(),
-                    "INCOME"
-            ));
+
+        if (!type.equals("EXPENSE")) {
+            for (Income i : incomes) {
+                result.add(new OperationDTO(
+                        i.getId_income(),
+                        i.getTitle(),
+                        i.getAmount(),
+                        i.getDate(),
+                        i.getCategory(),
+                        "INCOME"
+                ));
+            }
         }
+
         List<OperationDTO> filtered = result.stream()
                 .sorted((a, b) -> b.getDate().compareTo(a.getDate()))
                 .collect(Collectors.toList());

@@ -2,7 +2,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../contexts/AuthContext'
 import { useContext, useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGear, faChevronRight, faBars, faCirclePlus, faCircleMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faGear, faChevronRight, faBars, faCirclePlus, faCircleMinus, faPlus, faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { fetchWithAuth } from '../utils/fetchWithAuth';
 
 function OperationHistory() {
     const navigate = useNavigate();
@@ -10,6 +11,17 @@ function OperationHistory() {
     const [operations, setOperations] = useState([]);
     const [titleFilter, setTitleFilter] = useState("");
     const [debouncedFilter, setDebouncedFilter] = useState(titleFilter);
+    const [typeFilter, setTypeFilter] = useState('ALL');
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const dropdownOptions = [
+        { value: 'ALL', label: 'Wszystko' },
+        { value: 'INCOME', label: 'Wpływy' },
+        { value: 'EXPENSE', label: 'Wydatki' }
+    ];
+    const handleDropdownSelect = (value) => {
+        setTypeFilter(value);
+        setDropdownOpen(false);
+    };
 
     useEffect(() => {
         const handler = setTimeout(() => {
@@ -27,13 +39,16 @@ function OperationHistory() {
         if (titleFilter !== "") {
             params.append("title", debouncedFilter);
         }
+        if (typeFilter !== 'ALL') {
+            params.append("type", typeFilter);
+        }
 
-        fetch(`http://localhost:8080/api/operations/history?${params.toString()}`, {
+        fetchWithAuth(`http://localhost:8080/api/operations/history?${params.toString()}`, {
             headers: {
                 'Content-Type': 'application/json'
             },
             credentials: 'include'
-        })
+        }, navigate, logout)
             .then(res => {
                 if (!res.ok) throw new Error('Błąd serwera: ' + res.status);
                 return res.json();
@@ -43,7 +58,7 @@ function OperationHistory() {
                 console.error('Błąd pobierania danych:', err);
                 navigate('/login');
             });
-    }, [debouncedFilter]);
+    }, [debouncedFilter, typeFilter]);
 
     const handleLogout = async () => {
         await logout();
@@ -85,7 +100,7 @@ function OperationHistory() {
                         </Link>
                     </li>
                     <li className="adder-item">
-                        <Link to="addExpense" className="adder-link">
+                        <Link to="/addExpense" className="adder-link">
                             <i className="fa-circle-minus"><FontAwesomeIcon icon={faCircleMinus} /></i>
                             <span className="link-text">&nbsp;&nbsp;&nbsp;&nbsp;Dodaj wydatek</span>
                         </Link>
@@ -96,44 +111,72 @@ function OperationHistory() {
                 </div>
             </nav>
             <main className="history-main">
-                <div className="search-bar">
-                    <input
-                        type="text"
-                        placeholder="Szukaj po tytule operacji..."
-                        value={titleFilter}
-                        onChange={e => setTitleFilter(e.target.value)}
-                        style={{ width: '100%', padding: '8px', fontSize: '16px' }}
-                    />
-                </div>
-                <div className="operations-list">
-                    {operations.length === 0 ? (
-                        <p>Brak operacji do wyświetlenia</p>
-                    ) : (
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>Data</th>
-                                <th>Tytuł</th>
-                                <th>Kategoria</th>
-                                <th>Kwota</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {operations.map(op => (
-                                <tr key={`${op.type}-${op.id}`}>
-                                    <td>{new Date(op.date).toLocaleDateString()}</td>
-                                    <td>{op.title}</td>
-                                    <td>{op.category}</td>
-                                    <td>{op.amount.toFixed(2)}</td>
+                <section className="history">
+                    <h1>Historia operacji</h1>
+                    <div className="search-bar">
+                        <input
+                            type="text"
+                            placeholder="Szukaj po tytule operacji..."
+                            value={titleFilter}
+                            onChange={e => setTitleFilter(e.target.value)}
+                        />
+                    </div>
+                    <div className="operations-list">
+                        {operations.length === 0 ? (
+                            <p>Brak operacji do wyświetlenia</p>
+                        ) : (
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th className="date">Data</th>
+                                    <th className="title">Tytuł</th>
+                                    <th>Kategoria</th>
+                                    <th className="th-last">
+                                        Kwota
+                                        <span onClick={() => setDropdownOpen((open) => !open)}>
+                                            <FontAwesomeIcon icon={faChevronDown} />
+                                        </span>
+                                        {dropdownOpen && (
+                                            <ul>
+                                                {dropdownOptions.map(opt => (
+                                                    <li key={opt.value}
+                                                        style={{
+                                                            background: typeFilter === opt.value ? '#333' : 'transparent',
+                                                            fontWeight: typeFilter === opt.value ? 'bold' : 'normal'
+                                                        }}
+                                                        onClick={() => handleDropdownSelect(opt.value)}
+                                                    >
+                                                        {opt.label}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        )}
+                                    </th>
                                 </tr>
-                            ))}
-                            </tbody>
-                        </table>
-                    )}
-                </div>
+                                </thead>
+                                <tbody>
+                                {operations.map(op => (
+                                    <tr key={`${op.type}-${op.id}`}>
+                                        <td className="date">{new Date(op.date).toLocaleDateString()}</td>
+                                        <td className="title">{op.title}</td>
+                                        <td>{op.category}</td>
+                                        <td className={`td-last ${op.type === 'INCOME' ? "income" : "expense"}`}>
+                                            <i>{op.amount.toFixed(2)} </i> PLN
+                                        </td>
+                                    </tr>
+                                ))}
+                                </tbody>
+                            </table>
+
+                        )}
+                    </div>
+                    <div className="filler">
+                    </div>
+                </section>
             </main>
         </>
     );
 }
 
 export default OperationHistory;
+

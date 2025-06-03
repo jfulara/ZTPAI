@@ -3,6 +3,7 @@ import { AuthContext } from '../contexts/AuthContext'
 import { useContext, useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGear, faChevronRight, faBars, faCirclePlus, faCircleMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { fetchWithAuth } from '../utils/fetchWithAuth'
 
 function AddIncome() {
     const navigate = useNavigate();
@@ -18,14 +19,14 @@ function AddIncome() {
         e.preventDefault()
 
         try {
-            const response = await fetch('http://localhost:8080/api/operations/addIncome', {
+            const response = await fetchWithAuth('http://localhost:8080/api/operations/addIncome', {
                 method: 'POST',
-                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json'
                 },
+                credentials: 'include',
                 body: JSON.stringify({ title, amount, date, category, id_user: user.id_user })
-            });
+            }, navigate, logout);
 
             if (response.ok) {
                 navigate('/')
@@ -55,7 +56,7 @@ function AddIncome() {
                     <li><Link to="/" className="first">Podsumowanie<i className="fa-chevron-right"><FontAwesomeIcon icon={faChevronRight} /></i></Link></li>
                     <li><Link to="/budgetAnalysis">Analiza budżetu<i className="fa-chevron-right"><FontAwesomeIcon icon={faChevronRight} /></i></Link></li>
                     <li><Link to="/monthlyGoals">Cele miesięczne<i className="fa-chevron-right"><FontAwesomeIcon icon={faChevronRight} /></i></Link></li>
-                    <li><Link to="/operations">Historia operacji<i className="fa-chevron-right"><FontAwesomeIcon icon={faChevronRight} /></i></Link></li>
+                    <li><Link to="/history">Historia operacji<i className="fa-chevron-right"><FontAwesomeIcon icon={faChevronRight} /></i></Link></li>
                     <li><Link to="/statistics">Statystyki<i className="fa-chevron-right"><FontAwesomeIcon icon={faChevronRight} /></i></Link></li>
                     <li><Link to="/savings">Oszczędzanie<i className="fa-chevron-right"><FontAwesomeIcon icon={faChevronRight} /></i></Link></li>
                 </ul>
@@ -89,7 +90,7 @@ function AddIncome() {
             </nav>
             <main>
                 <section className="operation-form">
-                    <h1>Dodaj nowy wpływ</h1>
+                    <h1>Dodaj operację</h1>
                     <form onSubmit={handleSubmit}>
                         <div className="messages">
                             {messages.map((message, index) => (
@@ -97,6 +98,7 @@ function AddIncome() {
                             ))}
                             {error && <p style={{color: 'red'}}>{error}</p>}
                         </div>
+                        <h2>Wprowadź nowy wpływ</h2>
                         <input name="title" type="text" placeholder="Tytuł" value={title} onChange={e => setTitle(e.target.value)} required />
                         <input name="amount" type="number" step="0.01" min="0.00" placeholder="Kwota" value={amount} onChange={e => setAmount(e.target.value)} required />
                         <input name="date" type="date" placeholder="Data" value={date} onChange={e => setDate(e.target.value)} required />

@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGear, faChevronRight, faBars, faCirclePlus, faCircleMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
 import '../styles/operations.css';
+import { fetchWithAuth } from '../utils/fetchWithAuth';
 
 function Home() {
     const navigate = useNavigate();
@@ -11,19 +12,18 @@ function Home() {
     const [homeData, setHomeData] = useState(null);
 
     useEffect(() => {
-        fetch('http://localhost:8080/api/home', {
+        fetchWithAuth('http://localhost:8080/api/home', {
             headers: {
                 'Content-Type': 'application/json'
             },
             credentials: 'include'
-        })
+        }, navigate, logout)
             .then(res => res.json())
             .then(data => {
                 setHomeData(data);
             })
             .catch(err => {
                 console.error('Błąd pobierania danych:', err);
-                navigate('/login');
             });
     }, []);
 
@@ -69,7 +69,7 @@ function Home() {
                         </Link>
                     </li>
                     <li className="adder-item">
-                        <Link to="addExpense" className="adder-link">
+                        <Link to="/addExpense" className="adder-link">
                             <i className="fa-circle-minus"><FontAwesomeIcon icon={faCircleMinus} /></i>
                             <span className="link-text">&nbsp;&nbsp;&nbsp;&nbsp;Dodaj wydatek</span>
                         </Link>

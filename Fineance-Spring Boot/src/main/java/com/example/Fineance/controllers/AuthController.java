@@ -53,6 +53,8 @@ public class AuthController {
         String accessToken = jwtService.generateAccessToken(user);
         String refreshToken = jwtService.generateRefreshToken(user);
 
+        tokenService.saveToken(refreshToken, user);
+
         ResponseCookie accessCookie = ResponseCookie.from("accessToken", accessToken)
                 .httpOnly(true)
                 .secure(true)
@@ -90,10 +92,14 @@ public class AuthController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<?> logout(HttpServletResponse response, Authentication authentication) {
-        if (authentication != null) {
-            String email = authentication.getName();
-            tokenService.deleteTokenByUserEmail(email);
+    public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response) {
+        String refreshToken = Arrays.stream(request.getCookies() != null ? request.getCookies() : new Cookie[]{})
+                .filter(cookie -> "refreshToken".equals(cookie.getName()))
+                .findFirst()
+                .map(Cookie::getValue)
+                .orElse(null);
+        if (refreshToken != null) {
+            tokenService.deleteTokenByValue(refreshToken);
         }
 
         ResponseCookie expiredAccess = ResponseCookie.from("accessToken", "")
@@ -168,3 +174,4 @@ public class AuthController {
         return ResponseEntity.ok(dto);
     }
 }
+
