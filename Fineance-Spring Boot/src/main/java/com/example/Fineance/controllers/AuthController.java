@@ -24,6 +24,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import com.example.Fineance.security.UserDetailsServiceImpl;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -46,8 +51,18 @@ public class AuthController {
     @Autowired
     private TokenService tokenService;
 
+    @Operation(
+        summary = "Logowanie użytkownika",
+        description = "Zwraca dane użytkownika i ustawia ciasteczka z tokenami JWT."
+    )
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Zalogowano poprawnie"),
+        @ApiResponse(responseCode = "401", description = "Nieprawidłowe dane logowania")
+    })
     @PostMapping("/login")
-    public ResponseEntity<UserDTO> login(@RequestBody AuthRequest request, HttpServletResponse response) {
+    public ResponseEntity<UserDTO> login(
+            @RequestBody(description = "Dane logowania", required = true) @org.springframework.web.bind.annotation.RequestBody AuthRequest request,
+            HttpServletResponse response) {
         User user = authService.authenticate(request);
 
         String accessToken = jwtService.generateAccessToken(user);
@@ -85,12 +100,28 @@ public class AuthController {
         return ResponseEntity.ok(userDTO);
     }
 
+    @Operation(
+        summary = "Rejestracja użytkownika",
+        description = "Tworzy nowe konto użytkownika."
+    )
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Zarejestrowano pomyślnie"),
+        @ApiResponse(responseCode = "400", description = "Błędne dane rejestracyjne")
+    })
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
+    public ResponseEntity<?> register(
+            @RequestBody(description = "Dane rejestracyjne", required = true) @org.springframework.web.bind.annotation.RequestBody RegisterRequest request) {
         authService.register(request);
         return ResponseEntity.ok("Zarejestrowano pomyślnie");
     }
 
+    @Operation(
+        summary = "Wylogowanie użytkownika",
+        description = "Usuwa refresh token i czyści ciasteczka JWT."
+    )
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Wylogowano poprawnie")
+    })
     @PostMapping("/logout")
     public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response) {
         String refreshToken = Arrays.stream(request.getCookies() != null ? request.getCookies() : new Cookie[]{})
@@ -113,6 +144,14 @@ public class AuthController {
         return ResponseEntity.ok("Wylogowano");
     }
 
+    @Operation(
+        summary = "Odświeżenie access tokena",
+        description = "Zwraca nowy access token na podstawie refresh tokena."
+    )
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Token odświeżony poprawnie"),
+        @ApiResponse(responseCode = "401", description = "Brak refresh tokena lub token nieprawidłowy")
+    })
     @PostMapping("/refresh")
     public void refresh(HttpServletRequest request, HttpServletResponse response) {
         String refreshToken = Arrays.stream(request.getCookies() != null ? request.getCookies() : new Cookie[]{})
@@ -155,6 +194,15 @@ public class AuthController {
         response.addHeader(HttpHeaders.SET_COOKIE, newAccessCookie.toString());
     }
 
+    @Operation(
+        summary = "Pobiera dane aktualnie zalogowanego użytkownika",
+        description = "Zwraca dane użytkownika na podstawie tokena JWT."
+    )
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Dane użytkownika zwrócone poprawnie"),
+        @ApiResponse(responseCode = "401", description = "Brak autoryzacji"),
+        @ApiResponse(responseCode = "404", description = "Użytkownik nie znaleziony")
+    })
     @GetMapping("/me")
     public ResponseEntity<?> getCurrentUser(Authentication authentication) {
         if (authentication == null || !authentication.isAuthenticated()) {

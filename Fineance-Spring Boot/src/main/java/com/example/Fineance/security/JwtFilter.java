@@ -30,6 +30,13 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+        String path = request.getRequestURI();
+        // Wyjątki dla publicznych endpointów (Swagger, docs, auth)
+        if (path.startsWith("/swagger-ui") || path.startsWith("/v3/api-docs") || path.equals("/api/docs") || path.startsWith("/api/auth")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         String token = null;
         if (request.getCookies() != null) {
             for (Cookie cookie : request.getCookies()) {

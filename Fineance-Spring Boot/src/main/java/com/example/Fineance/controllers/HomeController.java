@@ -8,6 +8,10 @@ import com.example.Fineance.models.User;
 import com.example.Fineance.services.ExpenseService;
 import com.example.Fineance.services.IncomeService;
 import com.example.Fineance.services.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -36,8 +40,19 @@ public class HomeController {
         this.expenseService = expenseService;
     }
 
+    @Operation(
+        summary = "Pobiera dane do strony głównej użytkownika",
+        description = "Zwraca podsumowanie przychodów, wydatków i kategorii dla zalogowanego użytkownika."
+    )
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Dane zwrócone poprawnie"),
+        @ApiResponse(responseCode = "401", description = "Brak autoryzacji lub użytkownik niezalogowany"),
+        @ApiResponse(responseCode = "404", description = "Użytkownik nie znaleziony")
+    })
     @GetMapping
-    public ResponseEntity<HomeDTO> getHomeInfo(@AuthenticationPrincipal UserDetails userDetails) {
+    public ResponseEntity<HomeDTO> getHomeInfo(
+            @Parameter(description = "Dane uwierzytelnionego użytkownika", required = true)
+            @AuthenticationPrincipal UserDetails userDetails) {
         if (userDetails == null) {
             return ResponseEntity.status(401).build();
         }

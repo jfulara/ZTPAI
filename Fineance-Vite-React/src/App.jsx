@@ -10,6 +10,7 @@ import Messages from './views/Messages'
 import AddIncome from './views/AddIncome'
 import AddExpense from './views/AddExpense'
 import OperationHistory from './views/OperationHistory'
+import Docs from './views/Docs'
 import './styles/App.css'
 import { AuthProvider } from './contexts/AuthContext'
 import PrivateRoute from './routes/PrivateRoute';
@@ -38,6 +39,7 @@ function App() {
                         <Route path="/users/:id_user/operations/incomes" element={<IncomesList />} />
                         <Route path="/messages" element={<Messages />} />
                     </Route>
+                    <Route path="/docs" element={<Docs />} />
                 </Routes>
             </Router>
         </AuthProvider>

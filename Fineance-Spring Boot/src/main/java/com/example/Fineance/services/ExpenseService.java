@@ -45,4 +45,8 @@ public class ExpenseService {
     public List<Expense> searchExpenses(long id_user, String title) {
         return expenseRepository.searchExpenses(id_user, title);
     }
+
+    public Optional<Expense> getExpenseById(long id) {
+        return expenseRepository.findById(id);
+    }
 }

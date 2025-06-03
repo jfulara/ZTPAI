@@ -93,7 +93,11 @@ function UsersList() {
                                     <li key={user.id_user} className="users-list-item">
                                         <div className="user-row">
                                             <Link to={`/users/${user.id_user}`}>{user.email}</Link>
-                                            <button className="delete-user-btn" onClick={() => handleDelete(user.id_user)} title="Usuń użytkownika">Usuń</button>
+                                            <button
+                                                className={`delete-user-btn${user.role === "ADMIN" ? " admin" : ""}`}
+                                                onClick={() => handleDelete(user.id_user)} title="Usuń użytkownika">
+                                                Usuń
+                                            </button>
                                         </div>
                                     </li>
                                 ))}

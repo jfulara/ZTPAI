@@ -657,6 +657,10 @@ form input {
     transition: background 0.2s, color 0.2s;
 }
 
+button.admin {
+    display: none;
+}
+
 .delete-user-btn:hover {
     background: #F7374F;
     color: #fff;

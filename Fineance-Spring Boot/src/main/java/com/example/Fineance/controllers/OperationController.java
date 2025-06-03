@@ -16,6 +16,11 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
 @RequestMapping("/api/operations")
@@ -31,18 +36,46 @@ public class OperationController {
         this.userRepository = userRepository;
     }
 
+    @Operation(
+        summary = "Pobiera wszystkie wydatki użytkownika",
+        description = "Zwraca listę wydatków dla podanego ID użytkownika."
+    )
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Lista wydatków zwrócona poprawnie"),
+        @ApiResponse(responseCode = "400", description = "Błędny identyfikator użytkownika")
+    })
     @GetMapping("/expenses")
-    public List<Expense> getAllExpensesByUser(@PathVariable Long id_user) {
+    public List<Expense> getAllExpensesByUser(
+            @Parameter(description = "ID użytkownika", required = true) @RequestParam Long id_user) {
         return expenseService.getAllExpensesByUser(id_user);
     }
 
+    @Operation(
+        summary = "Pobiera wszystkie wpływy użytkownika",
+        description = "Zwraca listę wpływów dla podanego ID użytkownika."
+    )
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Lista wpływów zwrócona poprawnie"),
+        @ApiResponse(responseCode = "400", description = "Błędny identyfikator użytkownika")
+    })
     @GetMapping("/incomes")
-    public List<Income> getAllIncomesByUser(@PathVariable Long id_user) {
+    public List<Income> getAllIncomesByUser(
+            @Parameter(description = "ID użytkownika", required = true) @RequestParam Long id_user) {
         return incomeService.getAllIncomesByUser(id_user);
     }
 
+    @Operation(
+        summary = "Dodaje nowy wpływ",
+        description = "Dodaje nowy wpływ na podstawie przesłanych danych."
+    )
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Wpływ dodany poprawnie"),
+        @ApiResponse(responseCode = "400", description = "Błędne dane wejściowe"),
+        @ApiResponse(responseCode = "500", description = "Błąd serwera podczas zapisu wpływu")
+    })
     @PostMapping("/addIncome")
-    public ResponseEntity<Income> addIncome(@RequestBody AddOperationDTO addIncome) {
+    public ResponseEntity<Income> addIncome(
+            @RequestBody(description = "Dane nowego wpływu", required = true) @org.springframework.web.bind.annotation.RequestBody AddOperationDTO addIncome) {
         Optional<User> user = userRepository.findById(addIncome.getId_user());
         if (user.isEmpty()) {
             return ResponseEntity.badRequest().build();
@@ -60,8 +93,18 @@ public class OperationController {
         return ResponseEntity.ok(savedIncome);
     }
 
+    @Operation(
+        summary = "Dodaje nowy wydatek",
+        description = "Dodaje nowy wydatek na podstawie przesłanych danych."
+    )
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Wydatek dodany poprawnie"),
+        @ApiResponse(responseCode = "400", description = "Błędne dane wejściowe"),
+        @ApiResponse(responseCode = "500", description = "Błąd serwera podczas zapisu wydatku")
+    })
     @PostMapping("/addExpense")
-    public ResponseEntity<Expense> addExpense(@RequestBody AddOperationDTO addExpense) {
+    public ResponseEntity<Expense> addExpense(
+            @RequestBody(description = "Dane nowego wydatku", required = true) @org.springframework.web.bind.annotation.RequestBody AddOperationDTO addExpense) {
         Optional<User> user = userRepository.findById(addExpense.getId_user());
         if (user.isEmpty()) {
             return ResponseEntity.badRequest().build();
@@ -79,11 +122,18 @@ public class OperationController {
         return ResponseEntity.ok(savedExpense);
     }
 
+    @Operation(
+        summary = "Wyszukuje operacje użytkownika",
+        description = "Zwraca listę operacji (wpływy i wydatki) użytkownika na podstawie filtrów."
+    )
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Lista operacji zwrócona poprawnie")
+    })
     @GetMapping("/history")
     public ResponseEntity<List<OperationDTO>> searchOperations(
-            @RequestParam Long id_user,
-            @RequestParam(required = false, defaultValue = "") String title,
-            @RequestParam(required = false, defaultValue = "") String type
+            @Parameter(description = "ID użytkownika", required = true) @RequestParam Long id_user,
+            @Parameter(description = "Tytuł operacji (filtrowanie)") @RequestParam(required = false, defaultValue = "") String title,
+            @Parameter(description = "Typ operacji: INCOME lub EXPENSE (filtrowanie)") @RequestParam(required = false, defaultValue = "") String type
     ) {
         List<Expense> expenses = expenseService.searchExpenses(id_user, title);
         List<Income> incomes = incomeService.searchIncomes(id_user, title);

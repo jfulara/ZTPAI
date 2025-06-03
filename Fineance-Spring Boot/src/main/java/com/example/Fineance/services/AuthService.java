@@ -4,6 +4,7 @@ import com.example.Fineance.dto.AuthRequest;
 import com.example.Fineance.dto.RegisterRequest;
 import com.example.Fineance.models.User;
 import com.example.Fineance.repositories.UserRepository;
+import com.example.Fineance.services.MessageSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,6 +26,9 @@ public class AuthService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private MessageSender messageSender;
+
     public void register(RegisterRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new RuntimeException("Konto o takim adresie email już istnieje");
@@ -38,6 +42,7 @@ public class AuthService {
         user.setRole("USER");
 
         userRepository.save(user);
+        messageSender.sendMessage("Zarejestrowano nowego użytkownika: " + user.getEmail() + " (" + user.getName() + " " + user.getSurname() + ")");
     }
 
     public User authenticate(AuthRequest request) {

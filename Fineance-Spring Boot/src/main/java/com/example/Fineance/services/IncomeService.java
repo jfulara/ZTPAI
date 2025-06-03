@@ -1,6 +1,7 @@
 package com.example.Fineance.services;
 
 import com.example.Fineance.dto.CategorySummaryDTO;
+import com.example.Fineance.models.Expense;
 import com.example.Fineance.models.Income;
 import com.example.Fineance.models.User;
 import com.example.Fineance.repositories.IncomeRepository;
@@ -46,5 +47,9 @@ public class IncomeService {
 
     public List<Income> searchIncomes(long id_user, String title) {
         return incomeRepository.searchIncomes(id_user, title);
+    }
+
+    public Optional<Income> getIncomeById(long id) {
+        return incomeRepository.findById(id);
     }
 }
