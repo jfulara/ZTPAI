@@ -2,14 +2,14 @@ import React, { useContext } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 import { AuthContext } from '../contexts/AuthContext'
 
-const PrivateRoute = () => {
+const AdminRoute = () => {
     const { user, loading } = useContext(AuthContext)
 
     if (loading) {
         return <p>Ładowanie...</p>
     }
 
-    return user ? <Outlet /> : <Navigate to="/login" />
+    return user.role === "ADMIN" ? <Outlet /> : <Navigate to="/" />
 }
 
-export default PrivateRoute
+export default AdminRoute

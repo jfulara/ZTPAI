@@ -24,7 +24,16 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    public Optional<User> getUserById(long id) {
-        return userRepository.findById(id);
+    public Optional<User> getUserById(long id_user) {
+        return userRepository.findById(id_user);
+    }
+
+    public boolean deleteUserById(long id_user) {
+        Optional<User> user = userRepository.findById(id_user);
+        if (user.isPresent()) {
+            userRepository.delete(user.get());
+            return true;
+        }
+        return false;
     }
 }

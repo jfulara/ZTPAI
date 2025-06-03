@@ -14,6 +14,7 @@ import './styles/App.css'
 import { AuthProvider } from './contexts/AuthContext'
 import PrivateRoute from './routes/PrivateRoute';
 import PublicRoute from './routes/PublicRoute';
+import AdminRoute from './routes/AdminRoute';
 
 function App() {
     return (
@@ -29,6 +30,8 @@ function App() {
                         <Route path="/addIncome" element={<AddIncome />} />
                         <Route path="/addExpense" element={<AddExpense />} />
                         <Route path="/history" element={<OperationHistory />} />
+                    </Route>
+                    <Route element={<AdminRoute />} >
                         <Route path="/users" element={<UsersList />} />
                         <Route path="/users/:id_user" element={<UserDetails />} />
                         <Route path="/users/:id_user/operations/expenses" element={<ExpensesList />} />

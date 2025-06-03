@@ -592,3 +592,114 @@ form input {
 /* #256EFF - intense blue */
 /* #E08E45 - orange */
 /* #E26D5A - dark orange */
+
+/* --- Stylowanie listy użytkowników (UsersList) --- */
+.users-list-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    background: #242424;
+    border-radius: 1.5rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    padding: 2rem 2.5rem 2.5rem 2.5rem;
+}
+
+.users-list-container h1 {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    color: #F7374F;
+    letter-spacing: 1px;
+}
+
+.users-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.users-list-item {
+    margin-bottom: 0.7rem;
+}
+
+.user-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #2C2C2C;
+    border-radius: 0.8rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    padding: 0.5rem 1rem;
+    transition: background 0.2s;
+}
+
+.user-row a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+}
+
+.user-row a:hover {
+    color: #88304E;
+}
+
+.delete-user-btn {
+    background: #BF1A2F;
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.4rem 1.1rem;
+    margin-left: 1.2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.delete-user-btn:hover {
+    background: #F7374F;
+    color: #fff;
+}
+
+/* --- Stylowanie widoku szczegółów użytkownika (UserDetails) --- */
+.user-details-container {
+    max-width: 500px;
+    margin: 10rem auto;
+    background: #242424;
+    border-radius: 1.5rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    padding: 2.5rem 2.5rem 2rem 2.5rem;
+    color: #fff;
+}
+
+.user-details-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.user-details-list li {
+    font-size: 1.15rem;
+    margin-bottom: 1.2rem;
+    background: #2C2C2C;
+    border-radius: 0.7rem;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.user-details-label {
+    font-weight: normal;
+    color: #F7374F;
+    min-width: 110px;
+    margin-right: 1.5rem;
+}
+
+.user-details-value {
+    color: #fff;
+    word-break: break-all;
+}
+

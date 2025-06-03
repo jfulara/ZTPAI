@@ -5,7 +5,7 @@ import { AuthContext } from '../contexts/AuthContext';
 function PublicRoute() {
     const { user, loading } = useContext(AuthContext);
 
-    if (loading) return null; // lub spinner
+    if (loading) return null;
 
     return user ? <Navigate to="/" replace /> : <Outlet />;
 }

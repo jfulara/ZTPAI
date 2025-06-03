@@ -52,7 +52,11 @@ function Home() {
                     <li><Link>Oszczędzanie<i className="fa-chevron-right"><FontAwesomeIcon icon={faChevronRight} /></i></Link></li>
                 </ul>
                 <div className="buttons">
-                    <button className="technical-help">Pomoc techniczna</button>
+                    <button className="technical-help" type="button"
+                        onClick={() => navigate(user.role === "ADMIN" ? "/users" : "/")}
+                    >
+                        {user.role === "ADMIN" ? "Panel admina" : "Pomoc techniczna"}
+                    </button>
                     <button className="settings"><i className="fa-gear"><FontAwesomeIcon icon={faGear} /></i>Ustawienia</button>
                     <button className="logout" onClick={handleLogout}>Wyloguj się</button>
                 </div>
